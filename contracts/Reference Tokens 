@@ -1,0 +1,33 @@
+
+;; here we need to understand better the methods of work where we either be using a list and a map
+;;(define-data-var action_fund_allocation (list tuple expr-2) value)
+
+(define-fungible-token ardkon_lb_lira u100000000000000000) ;; simulation of Lebanese lira donations each 1000 LL is 1 ardkon_lira
+;; We will Have some of the Gateways physical in Locations in Lebanon where people can exchange LL to ardkon_lira and vice verse
+
+(define-fungible-token ardkon_usd u100000000000000000) ;; simulation of dollars investments inside of the platform
+
+
+(define-fungible-token ardkon_social_points u100000000000000000) ;; will be social points earned from either being a donor or from being a volunteer
+;; social points will be given tto donors for example 1 social point for every 10$ etcc
+;; social points will be given as well to volunteers that volunteer in an action
+
+(define-fungible-token productivity_performance_indice u100000000000000000);; find out better if it should be a token or just a ratio
+
+
+;; We have to understand better the types where 
+
+(define-map fund_allocation {fund_name: principal,  } {amount: uint, currency: (string-utf8 256)})
+
+
+;; One Contrat will be a contract that will hold all the users Payment information now understanding beeter and better we will be able to configure the understanding
+
+
+;;This Type couple be Fast action, Monthly action, Hourly Hackathon, daily Hackathon, and Live STreamed Events
+(define-data-var action_type (string-utf8 256) u"Monthly Action")
+
+;;action name is just the name of the action
+(define-data-var antion_name (string-utf8 256) u"action name")
+
+;;action description
+(define-data-var action_small_description (string-utf8 256) u"hello world")
