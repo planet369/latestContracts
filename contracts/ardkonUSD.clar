@@ -1,5 +1,12 @@
 (define-fungible-token ardkonUSD)
 
+
+
+;; Errors:
+
+(define-constant ERR-not-application u401)
+
+
 ;; the human readable name of the token
 (define-read-only (get-name) 
   (ok "ardkon USD"))
@@ -28,39 +35,30 @@
     (ft-transfer? ardkonUSD amount sender recipient)
   ))
 
-(define-public (donate-to-action (amount uint) (sender principal) (contract principal)) 
+
+
+
+(define-constant account-contractor 'SP1BBF4MY50BJW4YT1NVQPZMG20S52S2C71TRK5B6)
+;; How could we make the buyer easier where users upon purchare they can buy
+
+;; instead of the process of buying usd it is better to just transsfer the amount directly to the account holder 
+;; but as well this will give us the oppurtunity to make double case scenarios where a user can transfer his funds to ardkon usd and then he can choose to donate to several actions and this will be most basically used in the process of having a wallet 
+
+
+(define-public (donate-to-action-guest (amount uint)  (contract principal)) 
   (begin 
-    (asserts! (is-eq tx-sender sender) (err u401))
-    (ft-transfer? ardkonUSD amount sender contract)
+    (asserts! (is-eq tx-sender account-contractor) (err u401))
+    (ft-mint? ardkonUSD amount contract)
   ))
 
-(define-constant private-key u"PrivateKey")
-(define-map private-keys {application: (string-utf8 256)} {key: (string-utf8 256)})
-
-(define-public (set-keys (application (string-utf8 256)) (key (string-utf8 256) ) )
+(define-public (buy-ardUSD (amount uint) (buyer principal) ) 
+ 
+  (begin 
   
-  (begin 
-  (asserts! (is-eq tx-sender (as-contract tx-sender)) (err u401))
-  (map-insert private-keys  {application: application} {key: key})
-  (ok u"s")
-   )
-)
-;;Having the Private key change on every transaction and knowing exactly the function and implementing the funtion this will help us identify a better way to secure the buying. 
-;;ardkon-123shty
-
-;; How could we make the buyer easier where users upon purchare they can buy
- (map-insert private-keys  {application: u"ardkon"} {key: u"ardkon-123shty"})
-(define-public (buy-ardusd (amount uint) (buyer principal) (privateKey (string-utf8 256)) (application (string-utf8 256)) ) 
-  (begin 
-  (let (( secret-key (map-get? private-keys {application: u"ardkon"}))) 
-    
-    (ok secret-key))
-    ) 
+  (asserts! (is-eq tx-sender account-contractor) (err u401))
+  (ft-mint? ardkonUSD amount buyer)
+  )
   
 )
 
-(define-read-only (get-private) 
-(let (( secret-key (map-get? private-keys {application: u"ardkon"}))) 
-    
-    (ok secret-key))
-) 
+;; First Method is that the user purchase USD and then he can donate any amount he requests to other contracts(this is the most )
