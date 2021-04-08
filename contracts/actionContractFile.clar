@@ -20,7 +20,7 @@
 (define-map total_fund_stx  { action_id: (string-utf8 256)} { stx: uint})
 (define-map total_fund_collected  { action_id: (string-utf8 256)} { ardkonUSD: uint, ardkonStacks: uint})
 
-(define-constant account-contractor 'ST1EVC4A48Y3N2QFP09K8X87PR85CD4FCD31AVQ17)
+(define-constant account-contractor 'ST1XK1467FKTFQ6K4XHWFQR4XFEK3X7PCR5J464SR)
 
 (define-map action-indices {action_id: (string-utf8 256)} {index: uint}) ;; this will enable us to get length of each of the following actions 
 
@@ -75,7 +75,7 @@
                                                                             donation-currency: u"ardkonUSD",
                                                                             amount: amount})
        (map-set total_fund_usd { action_id: action_id} {ardkon-usd: (+  total-usd-fund  amount) })
-       (unwrap! (contract-call? 'ST1EVC4A48Y3N2QFP09K8X87PR85CD4FCD31AVQ17.ard-usd-01 donate-to-action-guest amount tx-sender) (err u12))
+       (unwrap! (contract-call? 'ST1XK1467FKTFQ6K4XHWFQR4XFEK3X7PCR5J464SR.ard-usd-01 donate-to-action-guest amount tx-sender) (err u12))
        )
      (ok "donation added") )
         
@@ -196,8 +196,3 @@
          (ok "donation done")
          )
 )
-
-  
-    
-
-    

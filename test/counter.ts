@@ -6,7 +6,7 @@ describe("counter contract test suite", () => {
   let provider: Provider;
   before(async () => {
     provider = await ProviderRegistry.createProvider();
-    actionClient = new Client("SP3GWX3NE58KXHESRYE4DYQ1S31PQJTCRXB3PE9SB.ardkonUSD", "ardkonUSD", provider);
+    actionClient = new Client("SP3GWX3NE58KXHESRYE4DYQ1S31PQJTCRXB3PE9SB.action-by-contract", "", provider);
   });
   it("should have a valid syntax", async () => {
     await actionClient.checkContract();
